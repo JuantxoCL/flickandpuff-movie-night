@@ -1,317 +1,142 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cozy Night Recommender · Flick & Puff</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#2c2f33; --sub:#6b6f74; --cream:#f5f1e8; --paper:#fbf8f2;
-  --amber:#C99F5C; --amber-d:#A67A47; --border:rgba(201,159,92,.22);
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--cream);color:var(--ink)}
-body{font-family:'Manrope',sans-serif}
-.container{max-width:980px;margin:24px auto;padding:0 16px}
-.header{text-align:center;margin-bottom:16px}
-.h1{font-family:'Cormorant Garamond',serif;font-weight:700;letter-spacing:-.2px;font-size:34px;margin:0 0 4px}
-.sub{color:var(--sub);margin:0;font-size:15px}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flick & Puff — Cozy Night Recommender</title>
 
-.card{background:rgba(255,255,255,.8);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.06)}
-.controls{padding:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media (max-width:860px){.grid{grid-template-columns:1fr}}
-.group h3{margin:0 0 8px;font-size:13px;letter-spacing:.4px;font-weight:900;text-transform:uppercase}
-.row{display:flex;flex-wrap:wrap;gap:8px}
-.chip{appearance:none;border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:9px 14px;font-weight:800;cursor:pointer;transition:.2s}
-.chip:hover{transform:translateY(-2px);border-color:var(--amber)}
-.chip.active{background:linear-gradient(135deg,var(--amber),var(--amber-d));color:#fff;border-color:var(--amber);box-shadow:0 6px 16px rgba(201,159,92,.25)}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-.actions{display:flex;gap:10px;justify-content:center;padding:10px 12px 16px;border-top:1px solid var(--border)}
-.btn{display:inline-block;padding:12px 28px;border-radius:10px;border:2px solid;line-height:1;cursor:pointer;font-weight:800;letter-spacing:.4px;text-transform:uppercase;font-size:12px}
-.btn.primary{background:linear-gradient(135deg,var(--amber),var(--amber-d));border-color:var(--amber);color:#fff}
-.btn.secondary{background:transparent;border-color:var(--ink);color:var(--ink)}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.btn.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 28px rgba(201,159,92,.3)}
-
-.sheet{margin-top:16px;padding:0}
-.block{padding:18px 18px;border-top:1px solid var(--border)}
-.block:first-child{border-top:none}
-.sheet-head{padding:18px;border-bottom:1px solid var(--border);background:#fff;border-top-left-radius:16px;border-top-right-radius:16px}
-.title{font-family:'Cormorant Garamond',serif;font-size:24px;margin:0}
-.meta{margin:6px 0 0;color:var(--sub);font-weight:700}
-.callout{background:var(--paper);border-left:4px solid var(--amber);border-radius:8px;padding:14px 16px;margin:8px 0}
-.h4{margin:0 0 8px;font-size:13px;letter-spacing:.45px;text-transform:uppercase;font-weight:900}
-.list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-@media (max-width:860px){.list{grid-template-columns:1fr}}
-.li{display:flex;gap:10px;align-items:flex-start}
-.cb{width:17px;height:17px;border:2px solid var(--amber);border-radius:4px;flex:0 0 17px;margin-top:2px}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0;padding:0;list-style:none}
-.pill{border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;font-weight:800;text-decoration:none;color:var(--ink)}
-.tip{background:linear-gradient(0deg, rgba(201,159,92,.07), rgba(201,159,92,0));padding:12px 18px;border-bottom-left-radius:16px;border-bottom-right-radius:16px}
-.small{color:var(--sub);font-size:14px;margin:0}
-
-.footer-note{font-size:12px;color:var(--sub);text-align:center;margin:10px 0}
-</style>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1 class="h1">Cozy Night Recommender</h1>
-      <p class="sub">Pick who you’re with, your vibe, and energy. Get a printable plan.</p>
-    </div>
+  <main class="fp-shell">
+    <section class="fp-hero">
+      <h1 class="fp-hero-title">Your perfect night awaits</h1>
+      <p class="fp-hero-sub">Pick <strong>who</strong> you’re with, your <strong>vibe</strong>, <strong>energy</strong>, and <strong>length</strong>. We’ll build a printable plan.</p>
+    </section>
 
-    <div class="card controls" id="controls">
-      <div class="grid">
-        <div class="group" data-group="who">
-          <h3>Who are you with?</h3>
-          <div class="row">
-            <button class="chip" data-value="solo"    data-label="Solo">🎧 Solo</button>
-            <button class="chip" data-value="partner" data-label="Partner">💛 Partner</button>
-            <button class="chip" data-value="crew"    data-label="Crew">👯 Crew</button>
-            <button class="chip" data-value="family"  data-label="Family">🏠 Family</button>
-          </div>
-        </div>
-        <div class="group" data-group="mood">
-          <h3>Vibe check?</h3>
-          <div class="row">
-            <button class="chip" data-value="relaxed"  data-label="Relaxed">☁️ Relaxed</button>
-            <button class="chip" data-value="romantic" data-label="Romantic">🕯️ Romantic</button>
-            <button class="chip" data-value="playful"  data-label="Playful">😄 Playful</button>
-            <button class="chip" data-value="escape"   data-label="Escape">🚀 Escape</button>
-          </div>
-        </div>
-        <div class="group" data-group="energy">
-          <h3>Energy level</h3>
-          <div class="row">
-            <button class="chip" data-value="low"    data-label="Low">🌙 Low</button>
-            <button class="chip" data-value="medium" data-label="Medium">✨ Medium</button>
-            <button class="chip" data-value="high"   data-label="High">⚡ High</button>
-          </div>
+    <!-- SELECTORS -->
+    <section class="fp-selectors">
+      <div class="fp-card">
+        <h3 class="fp-card-title">Who are you with?</h3>
+        <div class="fp-pills" data-group="who">
+          <button class="fp-pill" data-value="solo">Solo</button>
+          <button class="fp-pill" data-value="partner">Partner</button>
+          <button class="fp-pill" data-value="crew">Crew</button>
+          <button class="fp-pill" data-value="family">Family</button>
         </div>
       </div>
-      <div class="actions">
-        <button id="build" class="btn primary" disabled>Build plan</button>
-        <button id="shuffle" class="btn secondary" disabled>Shuffle</button>
-        <button id="print" class="btn secondary" disabled>Print</button>
-      </div>
-    </div>
 
-    <div class="card sheet" id="sheet" hidden>
-      <div class="sheet-head">
-        <h2 class="title">Cozy Night Itinerary</h2>
-        <p id="meta" class="meta">—</p>
+      <div class="fp-card">
+        <h3 class="fp-card-title">Vibe</h3>
+        <div class="fp-pills" data-group="vibe">
+          <button class="fp-pill" data-value="relaxed">Relaxed</button>
+          <button class="fp-pill" data-value="romantic">Romantic</button>
+          <button class="fp-pill" data-value="playful">Playful</button>
+          <button class="fp-pill" data-value="escape">Escape</button>
+        </div>
       </div>
 
-      <div class="block">
-        <h4 class="h4">Setup</h4>
-        <ul id="setup" class="list"></ul>
+      <div class="fp-card">
+        <h3 class="fp-card-title">Energy</h3>
+        <div class="fp-pills" data-group="energy">
+          <button class="fp-pill" data-value="low">Low</button>
+          <button class="fp-pill" data-value="medium">Medium</button>
+          <button class="fp-pill" data-value="high">High</button>
+        </div>
       </div>
 
-      <div class="block">
-        <h4 class="h4">Watch / Do</h4>
-        <div id="plan" class="callout">—</div>
-        <p id="planNotes" class="small">—</p>
+      <div class="fp-card">
+        <h3 class="fp-card-title">Length</h3>
+        <div class="fp-pills" data-group="length">
+          <button class="fp-pill" data-value="short">Short (≤ 60m)</button>
+          <button class="fp-pill" data-value="feature">Feature (90–140m)</button>
+          <button class="fp-pill" data-value="marathon">Marathon (2–6h)</button>
+        </div>
       </div>
+    </section>
 
-      <div class="block">
-        <h4 class="h4">Soundtrack</h4>
-        <div id="music" class="callout">—</div>
-        <p id="musicNotes" class="small">—</p>
+    <!-- ACTIONS -->
+    <section class="fp-actions">
+      <button id="buildBtn" class="fp-btn fp-btn--primary">Build plan</button>
+      <button id="shuffleBtn" class="fp-btn fp-btn--ghost">Shuffle</button>
+      <button id="resetBtn" class="fp-link">Reset</button>
+      <button id="printBtn" class="fp-btn fp-btn--pill">Print</button>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="fp-results is-hidden" aria-live="polite">
+      <header class="fp-res-header">
+        <h2 class="fp-it-title">Cozy Night Itinerary</h2>
+        <p class="fp-it-meta" id="metaLine">—</p>
+      </header>
+
+      <div class="fp-grid">
+        <!-- LEFT: Itinerary -->
+        <article class="fp-itinerary">
+          <div class="fp-it-block">
+            <div class="fp-it-num">1</div>
+            <div class="fp-it-body">
+              <h3 class="fp-it-sub">Setup</h3>
+              <ul class="fp-checklist" id="setupList"></ul>
+            </div>
+          </div>
+
+          <div class="fp-it-block">
+            <div class="fp-it-num">2</div>
+            <div class="fp-it-body">
+              <h3 class="fp-it-sub">Soundtrack</h3>
+              <div class="fp-callout" id="musicBox"></div>
+              <div class="fp-row fp-gap">
+                <a class="fp-chip" id="spotifyLink" target="_blank" rel="noopener">Open Spotify</a>
+                <a class="fp-chip" id="ytMusicLink" target="_blank" rel="noopener">Open YouTube mix</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="fp-it-block">
+            <div class="fp-it-num">3</div>
+            <div class="fp-it-body">
+              <h3 class="fp-it-sub">Ambient Room</h3>
+              <div class="fp-callout" id="ambientBox"></div>
+              <a class="fp-chip" id="ambientLink" target="_blank" rel="noopener">Play ambient</a>
+            </div>
+          </div>
+
+          <div class="fp-it-block">
+            <div class="fp-it-num">4</div>
+            <div class="fp-it-body">
+              <h3 class="fp-it-sub">Shop the vibe (optional)</h3>
+              <div class="fp-row fp-wrap fp-gap" id="shopRow"></div>
+            </div>
+          </div>
+
+          <p class="fp-footer-note" id="footerNote"></p>
+        </article>
+
+        <!-- RIGHT: Recommendations -->
+        <aside class="fp-recs">
+          <h3 class="fp-recs-title">Top Picks</h3>
+          <div id="topList" class="fp-rec-cards"></div>
+
+          <h4 class="fp-alt-title">Alternates</h4>
+          <ol id="altList" class="fp-alt-list"></ol>
+
+          <div class="fp-search">
+            <a id="gSearch" class="fp-btn fp-btn--ghost" target="_blank" rel="noopener">Search on Google</a>
+          </div>
+        </aside>
       </div>
+    </section>
 
-      <div class="block">
-        <h4 class="h4">Shop the vibe (optional)</h4>
-        <ul id="shop" class="pills"></ul>
-      </div>
+    <footer class="fp-footer">
+      <p>Flick & Puff • <a class="fp-link-inline" href="https://www.flickandpuff.com" target="_blank" rel="noopener">flickandpuff.com</a></p>
+    </footer>
+  </main>
 
-      <div class="tip">
-        <p id="tip" class="small">—</p>
-      </div>
-    </div>
-
-    <p class="footer-note">© Flick & Puff · This is a lightweight client-side app (GitHub Pages).</p>
-  </div>
-
-<script>
-(function(){
-  // send height to parent (Shopify) for auto-resize
-  function postHeight(){ 
-    const h = document.documentElement.scrollHeight;
-    parent.postMessage({fp_height:h, source:'fp-recommender'}, '*');
-  }
-  new ResizeObserver(postHeight).observe(document.documentElement);
-  window.addEventListener('load',postHeight);
-  window.addEventListener('orientationchange',postHeight);
-
-  const state = {who:null,mood:null,energy:null,labels:{who:'',mood:'',energy:''},variant:0};
-  const controls = document.getElementById('controls');
-  const sheet = document.getElementById('sheet');
-  const btnBuild = document.getElementById('build');
-  const btnShuffle = document.getElementById('shuffle');
-  const btnPrint = document.getElementById('print');
-
-  const elMeta = document.getElementById('meta');
-  const elSetup = document.getElementById('setup');
-  const elPlan = document.getElementById('plan');
-  const elPlanN = document.getElementById('planNotes');
-  const elMusic = document.getElementById('music');
-  const elMusicN = document.getElementById('musicNotes');
-  const elShop = document.getElementById('shop');
-  const elTip = document.getElementById('tip');
-
-  // simple catalog + logic (same base para cualquier embed)
-  const titles = {
-    relaxed: { low:'Ambient Room + Gentle Stretch', medium:'Nature Doc / Feel-Good Feature', high:'Two Cozy Drama Episodes' },
-    romantic:{ low:'Short Romance + Candle Ritual',  medium:'Indie Romance Feature',         high:'Romantic Epic / Double' },
-    playful: { low:'2–3 Comfort Sitcom Episodes',    medium:'Comedy Feature + Snack Break',  high:'Heist/Comedy Event Night' },
-    escape:  { low:'Comfort Fantasy Film',           medium:'Adventure Classic',              high:'Sci-Fi Mind-Bender' }
-  };
-  const examples = {
-    relaxed: { low:'Fireplace / Rainy Cabin ambient while you stretch or journal 10 min.',
-               medium:'Planet Earth, Salt Fat Acid Heat, or a gentle indie with warmth.',
-               high:'Two cozy-drama episodes (45–55m) with a tea intermission.' },
-    romantic:{ low:'Short film & dinner-at-home. One candle, low lights.',
-               medium:'Before Sunrise, Brooklyn, La La Land.',
-               high:'Pride & Prejudice (2005), In the Mood for Love, double feature.' },
-    playful: { low:'Parks & Rec / Modern Family comfort.',
-               medium:'Game Night or a light stand-up special.',
-               high:'Knives Out + party rounds, or Ocean’s Eleven + games.' },
-    escape:  { low:'Howl’s Moving Castle / classic fantasy.',
-               medium:'The Grand Budapest Hotel or Guardians of the Galaxy.',
-               high:'Blade Runner 2049, Inception, Annihilation.' }
-  };
-  const music = {
-    relaxed: { title:'Lo-fi / Warm Piano', low:'50–70 BPM, low volume.', medium:'Lo-fi fireplace + soft piano.', high:'Long ambient to keep calm.' },
-    romantic:{ title:'Soft Soul & Jazz',   low:'Gentle ballads.',         medium:'Soul / jazz for dinner.',     high:'Indie folk + slow jazz all night.' },
-    playful: { title:'Feel-Good Pop',      low:'100–110 BPM.',            medium:'110–120 BPM warm-up.',       high:'120–130 BPM for event mood.' },
-    escape:  { title:'Cinematic Scores',   low:'Soft cues.',              medium:'Zimmer / Williams (moderate).', high:'Epic scores pre & post.' }
-  };
-  const setupBase = {
-    low:    ['Lights low, one candle lit.','Warm drink ready.','Do Not Disturb for 45 min.'],
-    medium: ['2–3 light sources (no ceiling).','Simple snacks ready.','Timer for mini-break.'],
-    high:   ['Snack bar (sweet + salty).','“Cinema” volume level.','Planned intermission.']
-  };
-  const tips = { solo:'Pre-warm the blanket 3 min in the dryer.',
-                 partner:'Scatter 2–3 candles; avoid ceiling lights.',
-                 crew:'Split snacks into 2–3 stations to avoid lines.',
-                 family:'Let kids pick seats and one topping.' };
-
-  const SHOP = [
-    {label:'Blankets & Throws', url:'/collections/blankets-throws'},
-    {label:'Mugs', url:'/collections/mugs'},
-    {label:'Pillows', url:'/collections/pillows'},
-    {label:'Posters', url:'/collections/posters'},
-    {label:'Notebooks', url:'/collections/notebooks'},
-    {label:'Coasters', url:'/collections/coasters'},
-    {label:'Bottles & Tumblers', url:'/collections/bottles-and-tumblers'},
-    {label:'Desk Mats & Mouse Pads', url:'/collections/desk-mats-mouse-pads'},
-    {label:'Totes & Bags', url:'/collections/totes-bags'},
-    {label:'Gift Cards', url:'/products/gift-card'}
-  ];
-  const shopByWho = {
-    solo:['Blankets & Throws','Mugs','Notebooks','Coasters'],
-    partner:['Blankets & Throws','Pillows','Mugs','Gift Cards'],
-    crew:['Coasters','Bottles & Tumblers','Desk Mats & Mouse Pads','Totes & Bags'],
-    family:['Mugs','Blankets & Throws','Posters','Coasters']
-  };
-
-  function enableIfReady(){
-    const ready = !!(state.who && state.mood && state.energy);
-    btnBuild.disabled = !ready;
-    btnShuffle.disabled = !ready || sheet.hidden;
-    btnPrint.disabled = sheet.hidden;
-  }
-
-  // chip behavior
-  controls.querySelectorAll('.group').forEach(group=>{
-    group.addEventListener('click', e=>{
-      const b = e.target.closest('.chip'); if(!b) return;
-      group.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      const key = group.getAttribute('data-group'); // who | mood | energy
-      state[key] = b.dataset.value;
-      state.labels[key] = b.dataset.label;
-      state.variant = 0;
-      enableIfReady();
-      postHeight();
-    });
-  });
-
-  function fillChecklist(items){
-    elSetup.innerHTML = items.map(t=>`<li class="li"><span class="cb"></span><span>${t}</span></li>`).join('');
-  }
-  function fillPills(labels){
-    const map = new Map(SHOP.map(s=>[s.label,s]));
-    elShop.innerHTML = labels.filter(l=>map.has(l)).map(l=>{
-      const s = map.get(l);
-      return `<li><a class="pill" href="${s.url}" target="_top" rel="noopener">${s.label}</a></li>`;
-    }).join('');
-  }
-
-  function build(){
-    const {who,mood,energy,labels} = state;
-    elMeta.textContent = `${labels.who} · ${labels.mood} · ${labels.energy} energy`;
-
-    const t = titles[mood][energy];
-    const ex = examples[mood][energy];
-    elPlan.innerHTML = `<strong>${t}</strong><br>${ex}`;
-
-    const noteByWho = {
-      solo:'Pick a single feature or one Ambient Room to keep it light.',
-      partner:'Lower volume slightly — it invites closeness.',
-      crew:'Avoid polarizing themes; aim for laughs and pace.',
-      family:'Keep a short “intermission” for bathroom/snacks.'
-    };
-    elPlanN.textContent = noteByWho[who];
-
-    const mus = music[mood];
-    elMusic.innerHTML = `<strong>${mus.title}</strong><br>${mus[energy]}`;
-    elMusicN.textContent = (mood==='relaxed') ? 'Set Spotify cross-fade to 4–6s.' : 'Prepare a short pre-show queue (3 tracks).';
-
-    const setup = [...setupBase[energy], {
-      solo:'Phone on Focus for 60 min.',
-      partner:'Share one blanket within reach.',
-      crew:'Extra cushions / chairs ready.',
-      family:'Hot chocolate / cocoa mugs set.'
-    }[who]];
-    fillChecklist(setup);
-
-    fillPills(shopByWho[who]);
-    elTip.textContent = tips[who];
-
-    sheet.hidden = false;
-    enableIfReady();
-    postHeight();
-  }
-
-  btnBuild.addEventListener('click', build);
-  btnShuffle.addEventListener('click', ()=>{
-    const alts = [
-      'Use a tray: candle + remote + snacks = zero friction.',
-      'Dim two lamps; never use ceiling lights.',
-      'Queue endings credit songs for a soft landing.'
-    ];
-    elTip.textContent = alts[state.variant % alts.length];
-    state.variant++; postHeight();
-  });
-  btnPrint.addEventListener('click', ()=>window.print());
-
-  // Optional: read initial params (?who=crew&mood=playful&energy=medium)
-  const params = new URLSearchParams(location.search);
-  ['who','mood','energy'].forEach(k=>{
-    const v = params.get(k);
-    if(v){
-      const g = controls.querySelector(`.group[data-group="${k}"]`);
-      const btn = g?.querySelector(`.chip[data-value="${v}"]`);
-      if(btn){ btn.click(); }
-    }
-  });
-
-})();
-</script>
+  <script src="assets/js/app.js" defer></script>
 </body>
 </html>
